@@ -1,0 +1,252 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Portada
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+%%  Previos %%  Altura de la caja de título
+\renewcommand\@ytitulo{0.67\paperheight}
+%%  Previos %%  Logos de fondo
+\renewcommand{\logofondo}[2][0.65\paperwidth]
+    {\renewcommand\@logofondo{#2}
+    \newcommand\@llogofondo{#1}}
+%%  Previos %%  Longuitud de la caja de título
+\renewcommand\@ltitulo{0.83\paperwidth}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Comando de portada
+\renewcommand{\portada}{
+    \pagenumbering{alph}
+    \newgeometry{left=0cm,right=0cm,top=0cm,bottom=0cm}
+    \thispagestyle{empty}
+    \begingroup\clearpage\noindent
+\begin{pspicture}(0,0)(0.99\paperwidth,\paperheight)%
+%%  Imagen de fondo
+    \ifthenelse{\equal{\@logofondo}{}}{}{
+    \begin{psclip}{
+        \psframe[linestyle=none](.27\paperwidth,.13\paperheight)
+            (.98\paperwidth,.55\paperheight)}
+        % \psframe(0.\paperheight,.0\paperheight)
+        %     (1\paperheight,.99\paperheight)}
+        \rput(0.64\paperwidth,.335\paperheight)
+        {\includegraphics[width=\@llogofondo]{\@logofondo}}
+    \end{psclip}}
+%%  Título
+    \rput(0.5\paperwidth,\@ytitulo)
+    {\psshadowbox[framearc=0.25,linecolor=colorportada,
+        shadowcolor=colorportada!50,framesep=0.5cm]
+        {\begin{minipage}{\@ltitulo}\begin{spacing}{1.2}
+        \ifthenelse{\equal{\@fasciculo}{}}
+        {
+        \ifthenelse{\equal{\@subtitulo}{}}
+            {\Huge\centering \textbf{\textsc{\@titulo}}}
+            {\Huge\centering \textbf{\textsc{\@titulo\\[2mm]
+            \huge \@subtitulo}}}
+        }
+        {
+        \ifthenelse{\equal{\@subtitulo}{}}
+            {\Huge\centering \textbf{\textsc{\@titulo\\ \LARGE \@fasciculo}}}
+            {\Huge\centering \textbf{\textsc{\@titulo\\ \huge \@subtitulo \\
+                \LARGE \@fasciculo}}}
+        }
+        \end{spacing}\vspace{-\baselineskip}\end{minipage}
+        }
+    }
+%%  Linea autor
+    \psframe*[linecolor=colorportada](-.1,-.1)
+        (1.01\paperwidth,.12\paperheight)
+        \uput{5mm}[l](.99\paperwidth,.08\paperheight)
+        {\huge\color{white} \textbf{\@autor}}
+%%  Recuadro superior
+    \psframe*[linecolor=colorportada]
+        (-.1,.76\paperheight)(1.01\paperwidth,1.01\paperheight)
+%%  Parte superior
+    \rput(0.4\paperwidth,.88\paperheight)
+        {\includegraphics[width=\@lplogouno]{\@logouno}}
+    \psline[linecolor=white,linewidth=2pt]
+        (.67\paperwidth,.96\paperheight)
+        (.67\paperwidth,.80\paperheight)
+    \uput[r](.67\paperwidth,.92\paperheight){
+        \begin{minipage}{0.12\paperheight}
+            \huge\color{white} \textbf{\@series}
+        \end{minipage}}
+    \uput[r](.67\paperwidth,.84\paperheight){
+        \begin{minipage}{0.12\paperheight}
+            \color{white}
+            \scalebox{6}{\textbf{\@numero}}
+        \end{minipage}}
+%%  Nombre escuela
+    \uput[u](.13\paperwidth,.13\paperheight){
+        \rotatebox{90}{\begin{minipage}{0.44\paperheight}
+            \huge \textbf{\textsc{Escuela de Ciencias Físicas y Matemática}}
+        \end{minipage}}}
+\end{pspicture}
+\endgroup
+\restoregeometry
+\ifthenelse{\equal{\@npblanco}{true}}{}
+    {\cleartooddpage[\thispagestyle{empty}\vspace*{\fill}
+    \textcolor{gray!50}{Esta página ha sido dejada intencionalmente en blanco.}
+    \par\vspace*{\fill}]}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Portadilla
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Este comando genera la portadilla y la hoja de créditos.
+\renewcommand{\portadilla}{
+    \newgeometry{left=3cm,right=3cm,top=3cm,bottom=3cm}
+    \begin{spacing}{1.0}
+    \thispagestyle{empty}
+    \setcounter{page}{1}
+    \pagenumbering{roman}
+\begingroup
+    \centering
+%%  Serie
+    \begin{spacing}{1.3}
+        \Large\scshape \@series
+    \end{spacing}
+%%  Autor
+    \vspace{0.21\textheight}
+        {\large\scshape \@autorcorto}\\[1\baselineskip]
+%%  Titulo entre lineas
+        \begingroup
+        \color{colortext}
+        \rule{\linewidth}{1.6pt}\\[-\baselineskip]\vspace{3pt}
+        \rule{\linewidth}{0.4pt}\\[0.5\baselineskip]
+        \begin{spacing}{1}
+        \ifthenelse{\equal{\@fasciculo}{}}
+        {
+        \ifthenelse{\equal{\@subtitulo}{}}
+            {\LARGE \textsc{\@titulo}}
+            {{\LARGE \textsc{\@titulo}}\\[\baselineskip]
+            {\Large\scshape \@subtitulo}}
+        }
+        {
+        \ifthenelse{\equal{\@subtitulo}{}}
+            {\LARGE \textsc{\@titulo}\\[\baselineskip]{\large\@fasciculo}}
+            {{\LARGE \textsc{\@titulo}}\\[\baselineskip]
+            {\scshape \Large\@subtitulo}\\[\baselineskip]{\large\@fasciculo}}
+        }
+        \end{spacing}
+        \vspace*{-0.5\baselineskip}
+        \rule{\linewidth}{0.4pt}\\[-\baselineskip]\vspace{4.5pt}
+        \rule{\linewidth}{1.6pt}
+        \endgroup
+%%  Logos
+    \par\vfill
+    \includegraphics[width=\@lclogodos]{\@logodos}
+    \par\vspace*{0.001\textheight}
+%%  Página de créditos
+\newpage
+\thispagestyle{empty}
+\raggedright
+%%  Serie, título y autor
+    \vspace*{\baselineskip}
+    {\textbf{\@serie\ No. \@numero}}\\[0.6\baselineskip]
+    {\scshape
+    \ifthenelse{\equal{\@fasciculo}{}}
+    {
+    \ifthenelse{\equal{\@subtitulo}{}}
+        {\@titulo}
+        {\@titulo\@sepsubtitulo\ \@subtitulo}
+        \\[0.6\baselineskip]
+    }
+    {
+    \ifthenelse{\equal{\@subtitulo}{}}
+        {\@titulo\\[0.2\baselineskip] \@fasciculo}
+        {\@titulo\@sepsubtitulo\ \@subtitulo\\[0.2\baselineskip]\@fasciculo}
+        \\[0.6\baselineskip]
+    }
+    }
+    {\@autor}\par
+    \small\vspace*{4\baselineskip}
+%%  Créditos
+    \ifthenelse{\equal{\@asistente}{}}{}
+        {\textbf{Asistentes}: \@asistente \\[1mm]}
+    \ifthenelse{\equal{\@editor}{}}{}
+        {\textbf{Responsable de la Edici\'on}: \@editor \\[1mm]}
+    \ifthenelse{\equal{\@asisedicion}{}}{}
+        {\textbf{Asistente de Edici\'on}: \@asisedicion \\[1mm]}
+    \ifthenelse{\equal{\@revision}{}}{}
+        {\textbf{Revisi\'on Acad\'emica}: \@revision \\[1mm]}
+    \vspace*{4\baselineskip}
+%%  Registro e ISBN
+    Registro de derecho autoral No. \@regautoral\\[1mm]
+    ISBN: \@ISBN\par
+    \vspace*{4\baselineskip}
+%%  Publicado por
+    \ifthenelse{\equal{\@publicado}{}}{}
+    {Publicado \@publicado\par
+    \vspace*{4\baselineskip}}
+%%  Edición e impresión
+    \@edicion\ edici\'on: \@fechaedicion\\[1mm]
+    \ifthenelse{\equal{\@impresion}{}}{}
+    {
+    \ifthenelse{\equal{\@correcciones}{}}
+        {\@impresion\ impresi\'on: \@fechaimpresion}
+        {\@impresion\ impresi\'on (con correcciones): \@fechaimpresion}\par
+    }
+    \vspace*{4\baselineskip}
+%%  Derechos
+\copyright\ \@derechos\ \@fechapub
+%%  Nota
+\ifthenelse{\equal{\@nota}{}}{}
+    {\par\vspace*{4\baselineskip}\@nota}
+\endgroup
+    \end{spacing}
+    \restoregeometry
+    \cleartooddpage[\thispagestyle{empty}]
+}
+
+\makeatother
+
+
+
+
+\iffalse
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Contraportada
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Altura de la caja de título
+\newcommand\@ytexto{0.55\paperheight}
+\newcommand{\ytexto}[1]{\renewcommand{\@ytexto}{#1}}
+%%  Medidas
+\newlength{\xqr}
+\newlength{\xisbn}
+\setlength{\xqr}{0.33\paperwidth-0.45in}
+\setlength{\xisbn}{0.66\paperwidth-0.75in}
+%%  Este comando genera la contraportada.
+\newcommand{\contraportada}[3]{
+\ifthenelse{\equal{\@npblanco}{true}}{}
+    {\cleartooddpage[\thispagestyle{empty}\vspace*{\fill}
+    \textcolor{gray!50}{Esta página ha sido dejada intencionalmente en blanco.}
+    \par\vspace*{\fill}]}
+    \newgeometry{left=0cm,right=0cm,top=0cm,bottom=0cm}
+    \thispagestyle{empty}
+\begingroup
+    \clearpage
+    \noindent
+    \begin{pspicture}(0,0)(\paperwidth,\paperheight)
+\rput(0.5\paperwidth,\@ytexto)
+    {
+        \begin{minipage}{.75\paperwidth}\begin{spacing}{1.2}
+        \slshape #3
+        \end{spacing}\vspace{-\baselineskip}\end{minipage}
+    }
+%%  Código QR e ISBN
+\rput(\xqr,.09\paperheight){\psbarcode{#2}
+        {width=1 height=1}{qrcode}}
+\rput(\xisbn,.09\paperheight){\psbarcode{\@ISBN}
+        {includetext guardwhitespace}{isbn}}
+%%  Linea 1
+    \psframe*[linecolor=colorp](-.1,.245\paperheight)
+        (1.01\paperwidth,.295\paperheight)
+\rput(.5\paperwidth,.27\paperheight){\LARGE\color{white} \textbf{#1}}
+%%  Linea título
+\psframe*[linecolor=colorp](-.1,.72\paperheight)
+        (1.01\paperwidth,.77\paperheight)
+\rput(.5\paperwidth,.745\paperheight){\huge\color{white} \textbf{\@titulo}}
+    \end{pspicture}
+\endgroup
+\restoregeometry
+}
+
+\fi

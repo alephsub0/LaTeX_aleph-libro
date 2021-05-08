@@ -1,0 +1,62 @@
+\documentclass[fnuevo,10pt]{aleph-libro}
+
+% -- Paquetes adicionales
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+\usepackage{lipsum}
+
+
+% -- Datos del libro
+\autor[A. Merino]{Andrés Merino}
+\titulo{Matemática para diseño}
+\subtitulo[:]{Herramientas básicas}
+%\fasciculo{Número reales}
+\numero{1 (1)}
+\serie{Cuadernos de Matemática\\[1mm] Escuela de Ciencias}{Cuaderno de matemática de la Escuela de Ciencias}
+\editor{Andrés Merino}
+%\revision{}
+%\asistente{}
+\fechapub{2018}
+\edicion{Primera}{2018}
+\impresion{Primera}{2018}
+\registroautoral{}
+\ISBN{978-0-00000-000}
+\publicado{en linea por Andrés Merino,\par Quito, Ecuador.}
+\derechos{Andrés Merino}
+\nota{Queda pro}
+
+% -- Logos
+\logouno{Logos/logo03}{3cm}{2.5cm}
+\logodos{Logos/logo01}{3cm}{2.5cm}
+\logofondo{Logos/logoFondo}
+
+% -- Colores
+\definecolor{colorp}{cmyk}{0.81,0.62,0.00,0.22}
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+% -- Otras adaptaciones
+\ecuadroblanco{.32\paperwidth}
+
+\input{AmbientesTeo}
+
+\begin{document}
+
+%\portada
+\portadilla
+\tabladecontenidos
+\mainmatter
+
+
+\include{Capitulos/01Cap}
+    \cleartooddpage[\thispagestyle{empty}]
+
+\include{Capitulos/02Ejemplos}
+    \cleartooddpage[\thispagestyle{empty}]
+
+%\contraportada{Escuela de Ciencias Físicas y Matemática}
+%    {https://en.wikipedia.org/wiki/QR_code}
+%    {\lipsum[7]}
+
+
+\end{document}

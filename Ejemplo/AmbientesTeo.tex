@@ -1,0 +1,45 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Ambientes en estilo clásico
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Ambientes con recuadro sin titulo aparte
+\theoremstyle{estiloteorema}
+    \newtheorem{pcuno}[prop]{Personalizado Uno}
+        \tcolorboxenvironment{pcuno}{color=brown,recuadrost}
+
+% - Ambientes con título aparte con otra numeración
+\newcounter{pnum}[chapter]
+\renewcommand{\thepnum}{\thechapter.\arabic{pnum}}
+\newtcolorbox{pcdos}[1][]
+    {tipo=Personalizado Dos,contador=pnum,color=magenta,recuadroctizq={#1}}
+
+% - Ambientes con título aparte con numeración y a la derecha
+\newtcolorbox{pctres}[1][]
+    {tipo=Personalizado Tres,contador=pnum,color=green,recuadroctder={#1}}
+
+%%  Ambientes con formato de advertencia.
+\newtcolorbox{pccuatro}
+    {icono=\faCloudDownload,color=pink,postit}
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Ambientes en estilo nuevo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Ambientes sin recuadro
+\theoremstyle{estiloteoreman}
+    \newtheorem*{pncero}{\color{red} \tikz \fill (1ex,1ex) circle (3.5pt); Personalizado cero}
+        
+% - Ambientes con recuadro sin titulo aparte
+\theoremstyle{estiloteoreman}   
+    \newtheorem{pnuno}[prop]{Personalizado Uno}
+        \tcolorboxenvironment{pnuno}{%
+            color=brown,recuadrost,colback=red!10,drop fuzzy shadow
+        }
+
+% - Ambientes con título aparte con otra numeración
+\newcounter{pnumnn}[chapter]
+\renewcommand{\thepnumnn}{\thechapter.\arabic{pnumnn}}
+\newtcolorbox{pndos}[1][]
+    {tipo=Personalizado Dos,contador=pnumnn,color=magenta,recuadroctint={#1}}
+
+\newtcolorbox{pntres}[1][]
+    {tipo=Personalizado Tres,contador=pnumnn,color=olive,recuadroctint={#1},
+    colback=lime,colbacktitle=lime,colframe=lime}
