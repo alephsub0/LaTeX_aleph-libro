@@ -7,6 +7,7 @@
 \usepackage{mathpazo}
 \usepackage{float}
 \usepackage[margin=2.5cm,left=3.5cm]{geometry}
+\usepackage{changelog}
 
 \setlength{\parskip}{0.2\baselineskip}
 \renewcommand{\baselinestretch}{1.1}
@@ -16,8 +17,8 @@
 \newcommand{\package}[1]{\texttt{#1}}
 
 \title{\file{aleph-libro.cls}}
-\author{Proyecto Alephsub0\\ Andr\'es Merino}
-\date{2020-08-15\\ Versión 1.1}
+\author{Proyecto Alephsub0\\ Andr\'es Merino\footnote{Escuela de Ciencias Físicas y Matemáticas, Pontificia Universidad Católica del Ecuador} \\ Daniel Lara\footnote{Facultad de Ciencias, Escuela Politécnica Nacional}}
+\date{2023-12-24\\ Versión 2.0}
 
 \begin{document}
  
@@ -45,8 +46,8 @@ Las opciones de la clase son las siguientes:
     \item[|amplio|, |compacto|] genera la geometría del libro predeterminada, es decir, tamaño de página y márgenes. Las dimensiones generadas por por estas opciones están dadas en la Tabla~\ref{tab:01}. Por defecto, se usa |compacto|.
     \item[|notasm|] aumenta el margen externo a 5cm y define las dimensiones necesarias para colocar notas al margen. Por defecto, esta opción está desactivada.
     \item[|numobs|] numera el ambiente de Observaciones predefinidas por la clase. Por defecto, esta opción está desactivada.
-    \item[|fclasico|, |fnuevo|] define estilos para teoremas, definiciones y demás. La opción |fclasico| usa el estilo con el que empezó esta clase; |fnuevo| es un nuevo estilo, actualmente en desarrollo por Daniel Lara. Por defecto, se usa |fclasico|.
     \item[|npblanco|] elimina las páginas en blanco generadas luego de la portada y antes de la contraportada.
+    \item[|fuente|] define la fuente que se utilizará en el documento. Las opciones disponibles son |mathpazo| y |montserrat|. Por defecto, se utiliza |mathpazo|.
 \end{description}
   
 \begin{table}[ht]
@@ -184,29 +185,21 @@ Se puede cambiar fácilmente estos colores con los comandos\\
 \DescribeEnv{defi}
 \DescribeEnv{axioma}
 \DescribeEnv{ejer}
-    Existen cuatro estilos de teoremas definidos: sin recuadro, con recuadro con título incluido y con recuadro con título superior izquierdo y con recuadro con título superior derecho. Los ambientes predefinidos son: 
+    Existen dos estilos de teoremas definidos: recuadro sin título aparte y recuadro con título aparte interno. Los ambientes predefinidos son: 
 \begin{description}
     \item[|ejem|] para ejemplos, no utiliza recuadro, se numeran según el capítulo.
     \item[|obs|] para observaciones, no utiliza recuadro, por defecto no se numera a menos que se tenga la opción |numobs|.
     \item[|prop|{,} |cor|{,} |lem|] para proposiciones, corolarios y lemas, utiliza recuadro sin título aparte. Se numeran según el capítulo.
-    \item[|teo|] para teoremas, utiliza recuadro con título aparte izquierdo. Se numeran continuando |prop|.
-    \item[|defi|] para definiciones, utiliza recuadro con título aparte izquierdo. Se numeran según el capítulo.
-    \item[|axioma|] para axiomas, utiliza recuadro con título aparte izquierdo. Se numeran según el capítulo.
+    \item[|teo|] para teoremas, utiliza recuadro con título aparte interno. Se numeran continuando |prop|.
+    \item[|defi|] para definiciones, utiliza recuadro con título aparte interno. Se numeran según el capítulo.
+    \item[|axioma|] para axiomas, utiliza recuadro con título aparte interno. Se numeran según el capítulo.
     \item[|ejer|] para ejercicios, utiliza recuadro sin título aparte con la opción. Se numeran según el capítulo.
 \end{description}
-Las diferencias entre los estilos de teoremas de la versión clásica y la nueva pueden ser vistos en las figuras~\ref{fig:03} y~\ref{fig:04}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.8]{Figuras/TeoClasico.eps}
-    \caption{Ejemplo ambientes de teorema del estilo clásico}
-    \label{fig:03}
-\end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.8]{Figuras/TeoNuevo.eps}
-    \caption{Ejemplo ambientes de teorema del estilo nuevo}
+    \caption{Ejemplo ambientes de teorema}
     \label{fig:04}
 \end{figure}
 
@@ -215,37 +208,45 @@ Las diferencias entre los estilos de teoremas de la versión clásica y la nueva
 
 El inicio de un libro utilizando esta clase suele tener la siguiente forma:
 \begin{verbatim}
-    \documentclass[amplio,10pt]{aleph-libro}
-  
+    \documentclass[10pt]{aleph-libro}
+
     % -- Paquetes adicionales
     \usepackage{enumitem}
-  
+    \usepackage{amssymb}
+
     % -- Datos del libro
     \autor[A. Merino]{Andrés Merino}
     \titulo{Matemática para diseño}
     \subtitulo[:]{Herramientas básicas}
+    %\fasciculo{Número reales}
     \numero{1 (1)}
-    \serie{Cuadernos de Matemática\\[1mm] Escuela de Ciencias}
-        {Cuaderno de matemática de le Escuela de Ciencias}
+    \serie{Cuadernos de Matemática\\[1mm] Escuela de Ciencias}{Cuaderno de matemática de la Escuela de Ciencias}
     \editor{Andrés Merino}
-    \fechapub{2018}
-    \edicion{Primera}{2018}
+    %\revision{}
+    %\asistente{}
+    \fechapub{2023}
+    \edicion{Segunda}{2023}
     \impresion{Primera}{2018}
     \registroautoral{}
     \ISBN{978-0-00000-000}
     \publicado{en linea por Andrés Merino,\par Quito, Ecuador.}
     \derechos{Andrés Merino}
-    \nota{Queda permitida la distribución de la presente obra.}
+    \nota{Queda pro}
 
     % -- Logos
-    \logouno{Logos/logo01}{5cm}{4cm}
-    \logodos{Logos/logo02}{3cm}{2.5cm}
-  
+    \logouno{Logos/logo03}{3cm}{2.5cm}
+    \logodos{Logos/logo01}{3cm}{2.5cm}
+    \logofondo{Logos/logoFondo}
+
     % -- Colores
     \definecolor{colorp}{cmyk}{0.81,0.62,0.00,0.22}
-  
+    \definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
     % -- Otras adaptaciones
     \ecuadroblanco{.32\paperwidth}
+
+    % -- Fuentes
+    \fuente{montserrat}
 \end{verbatim}
 Con esto se obtiene las imágenes indicadas en la Figura~\ref{fig:01}.
 
@@ -258,37 +259,8 @@ Con esto se obtiene las imágenes indicadas en la Figura~\ref{fig:01}.
     \label{fig:01}
 \end{figure}
 
-También se pueden generar más ambientes de teoremas, con otros formatos y colores, siguiendo los siguientes ejemplos (con título aparte, por el momento, todos los ambientes deben numerarse por capítulos y sus respectivos contadores deben ser redefinidos como se muestra). Para el estilo clásico:
-\begin{verbatim}
-    % - Ambientes con recuadro sin titulo aparte
-    \theoremstyle{estiloteorema}
-        \newtheorem{pcuno}[prop]{Personalizado Uno}
-            \tcolorboxenvironment{pcuno}{color=brown,recuadrost}
-    
-    % - Ambientes con título aparte con otra numeración
-    \newcounter{pnum}[chapter]
-    \renewcommand{\thepnum}{\thechapter.\arabic{pnum}}
-    \newtcolorbox{pcdos}[1][]
-        {tipo=Personalizado Dos,contador=pnum,color=magenta,recuadroctizq={#1}}
-    
-    % - Ambientes con título aparte con numeración y a la derecha
-    \newtcolorbox{pctres}[1][]
-        {tipo=Personalizado Tres,contador=pnum,color=green,recuadroctder={#1}}
-    
-    %%  Ambientes con formato de advertencia.
-    \newtcolorbox{pccuatro}
-        {icono=\faCloudDownload,color=pink,postit}
-\end{verbatim}
-Con esto se obtiene la imagen indicada en la Figura~\ref{fig:02}. 
+También se pueden generar más ambientes de teoremas, con otros formatos y colores, siguiendo los siguientes ejemplos (con título aparte, por el momento, todos los ambientes deben numerarse por capítulos y sus respectivos contadores deben ser redefinidos como se muestra). 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.98]{Figuras/ReTeoClasico.eps}
-    \caption{Ejemplo de redefinición en estilo clásico}
-    \label{fig:02}
-\end{figure}
-
-Para el estilo nuevo:
 \begin{verbatim}    
     % - Ambientes sin recuadro
     \theoremstyle{estiloteoreman}
@@ -320,15 +292,8 @@ Con esto se obtiene la imagen indicada en la Figura~\ref{fig:05}.
     \label{fig:05}
 \end{figure}
 
-\subsection{Cambios}
 
-\begin{enumerate}
-\item 
-    Para la versión 1.1, se han eliminado las opciones de |guia| y |resumen| y se han implementado las opciones de |fclasico| y |fnuevo|. Además, se ha optimizado la generación de recuadros utilizando el paquete |tcolorbox|.
-\end{enumerate}
-
-
-\subsection{Problemas}
+\section{Problemas}
 
 \begin{itemize}
 \item
@@ -339,10 +304,40 @@ Con esto se obtiene la imagen indicada en la Figura~\ref{fig:05}.
         \item |tcbcolback| por |tcbcol@back|
         \item |tcbcolframe| por |tcbcol@frame|
     \end{itemize}
+\item
+    La versión actual genera páginas en blanco antes de la portada.
 \end{itemize}
 
 Cualquier otro problema adicional, por favor reportarlo a\\ 
 \url{mat.andresmerino@gmail.com}.
+
+\begin{changelog}[author=Andés Merino,
+    sectioncmd=\section]
+    % version 2.0
+    \begin{version}[author=Daniel Lara,v=2.0,
+        date=2023-12-24]
+        \removed
+        \item Se elimina el formato clásico para el estilo de los teoremas.
+        \added 
+        \item Se añade la posibilidad de seleccionar fuentes: Palatino Linotype (Mathpazo) y Monstserrat
+        \fixed 
+        \item Se ha optimizado la generación de recuadros utilizando el paquete |tcolorbox|.
+    \end{version}
+    % version 1.1
+    \begin{version}[v=1.2.1,
+    date=2020-08-14]
+    \added
+    \item Se incluye estilos de formato para ambientes: fclasico, fnuevo
+    \end{version}
+    % version 1.0
+    \shortversion{v=1.2,
+    date=2020-01-07,
+    changes=Primera versión del paquete \texttt{aleph-libro}}
+    % version 0.1
+    \shortversion{v=0.1,
+    date=2019-05-05,
+    changes=Última versión del parquete \texttt{pubciencias-notas}}
+\end{changelog}
 
 \newpage
 \DocInput{aleph-libro.dtx}

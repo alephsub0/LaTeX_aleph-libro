@@ -1,4 +1,4 @@
-\documentclass[fnuevo,10pt]{aleph-libro}
+\documentclass[10pt]{aleph-libro}
 
 % -- Paquetes adicionales
 \usepackage{enumitem}
@@ -6,6 +6,7 @@
 
 \usepackage{lipsum}
 
+\graphicspath{{./Ejemplo/}}
 
 % -- Datos del libro
 \autor[A. Merino]{Andrés Merino}
@@ -17,8 +18,8 @@
 \editor{Andrés Merino}
 %\revision{}
 %\asistente{}
-\fechapub{2018}
-\edicion{Primera}{2018}
+\fechapub{2023}
+\edicion{Segunda}{2023}
 \impresion{Primera}{2018}
 \registroautoral{}
 \ISBN{978-0-00000-000}
@@ -38,25 +39,26 @@
 % -- Otras adaptaciones
 \ecuadroblanco{.32\paperwidth}
 
-\input{AmbientesTeo}
+% -- Fuentes
+\fuente{montserrat}
+
+\input{Ejemplo/AmbientesTeo}
 
 \begin{document}
-
-%\portada
+\portada
 \portadilla
 \tabladecontenidos
 \mainmatter
 
-
-\include{Capitulos/01Cap}
+\include{Ejemplo/Capitulos/01Cap}
     \cleartooddpage[\thispagestyle{empty}]
 
-\include{Capitulos/02Ejemplos}
+\include{Ejemplo/Capitulos/02Ejemplos}
     \cleartooddpage[\thispagestyle{empty}]
 
-%\contraportada{Escuela de Ciencias Físicas y Matemática}
-%    {https://en.wikipedia.org/wiki/QR_code}
-%    {\lipsum[7]}
+\contraportada{Escuela de Ciencias Físicas y Matemática}
+   {https://en.wikipedia.org/wiki/QR_code}
+   {\lipsum[7]}
 
 
 \end{document}
