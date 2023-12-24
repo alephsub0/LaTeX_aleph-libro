@@ -12,8 +12,8 @@ Esta clase fue creada para dar formato a libros y fascículos de libros con alto
 ```
 
 ________
-Andrés Merino,
-Daniel Lara,
+Andrés Merino, 
+Daniel Lara, 
 Proyecto Alephsub0 --- https://www.alephsub0.org/
 
 2023/12/24
